@@ -31,12 +31,12 @@
       <div class="left-panel">
         <div class="clock-card">
           <h2>🕒 {{ currentTime }}</h2>
-          <div class="nav-links">
+<div class="nav-links">
             <NuxtLink to="/parent-bind" class="nav-btn parent-btn">👨‍👩‍👧 綁定</NuxtLink>
-            <NuxtLink to="/parent-message" class="nav-btn msg-btn">💬 私訊導師</NuxtLink>
+            <NuxtLink to="/parent-message" class="nav-btn msg-btn">💬 家長私訊</NuxtLink>
+            <NuxtLink to="/student-message" class="nav-btn stu-btn">💬 學生私訊</NuxtLink>
             <NuxtLink to="/admin" class="nav-btn admin-btn">
-              ⚙️ 後台
-              <span v-if="unreadCount > 0" class="notification-badge">{{ unreadCount }}</span>
+              ⚙️ 後台 <span v-if="unreadCount > 0" class="notification-badge">{{ unreadCount }}</span>
             </NuxtLink>
           </div>
         </div>
@@ -185,7 +185,7 @@ const fetchUnreadCount = async () => {
     .from('private_messages')
     .select('*', { count: 'exact', head: true })
     .eq('is_read_by_teacher', false)
-    .eq('sender_role', '家長')
+    .in('sender_role', ['家長', '學生']) // 同時檢查家長與學生的未讀
   if (count !== null) unreadCount.value = count
 }
 
@@ -210,6 +210,7 @@ onUnmounted(() => clearInterval(timer))
 .top-notice-board { margin-bottom: 0px; }
 
 /* 時鐘與按鈕區 */
+.stu-btn { background-color: #3b82f6; }
 .clock-card { background: white; border-radius: 12px; text-align: center; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 2px solid #e2e8f0; }
 .clock-card h2 { margin: 0 0 10px 0; font-size: 2rem; color: #2c3e50; }
 .nav-links { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
