@@ -4,7 +4,10 @@
     <div class="left-panel">
       <div class="clock-card">
         <h2>🕒 {{ currentTime }}</h2>
-        <NuxtLink to="/admin" class="admin-link">⚙️ 導師後台</NuxtLink>
+        <div class="nav-links">
+          <NuxtLink to="/parent-bind" class="nav-btn parent-btn">👨‍👩‍👧 家長綁定</NuxtLink>
+          <NuxtLink to="/admin" class="nav-btn admin-btn">⚙️ 導師後台</NuxtLink>
+        </div>
       </div>
 
       <div class="stats-row">
@@ -267,6 +270,13 @@ onUnmounted(() => clearInterval(timer))
 </script>
 
 <style scoped>
+/* 首頁導覽按鈕樣式 */
+.nav-links { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+.nav-btn { text-decoration: none; padding: 6px 12px; border-radius: 6px; font-size: 0.9rem; font-weight: bold; transition: opacity 0.2s; }
+.nav-btn:hover { opacity: 0.8; }
+.parent-btn { background-color: #f59e0b; color: white; }
+.admin-btn { background-color: #64748b; color: white; }
+
 /* 基礎排版保留 */
 .dashboard-container { display: flex; gap: 20px; padding: 20px; background-color: #f5f7fa; min-height: 100vh; font-family: 'sans-serif'; }
 .left-panel, .right-panel { flex: 1; display: flex; flex-direction: column; gap: 20px; }
