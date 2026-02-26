@@ -1,28 +1,14 @@
 <template>
   <div class="dashboard-container">
     
-    <div class="top-notice-board chalkboard">
+<div class="top-notice-board chalkboard">
       <div class="board-header">
         <h3 class="notice-title">📢 家長須知事項</h3>
-        <button v-if="!isEditingNotices" @click="requestEdit('notices')" class="edit-btn">✏️ 編輯</button>
-        <div v-else class="edit-actions">
-          <span class="editor-badge">{{ currentNoticeEditor }}編輯中</span>
-          <button @click="addNotice" class="add-btn">➕ 新增</button>
-          <button @click="saveBoard('notices')" class="save-btn">💾 儲存</button>
         </div>
-      </div>
       
-      <ul v-if="!isEditingNotices" class="task-list notice-list">
+      <ul class="task-list notice-list">
         <li v-for="(notice, index) in notices" :key="'n-'+index"><span class="bullet">📌</span> {{ notice }}</li>
         <li v-if="notices.length === 0" class="empty-text">目前無特別須知事項</li>
-      </ul>
-
-      <ul v-else class="task-list editing">
-        <li v-for="(notice, index) in notices" :key="'edit-n-'+index" class="edit-item">
-          <span class="bullet">📌</span>
-          <input v-model="notices[index]" type="text" class="edit-input notice-input" placeholder="輸入家長須知..." />
-          <button @click="removeNotice(index)" class="delete-btn">🗑️</button>
-        </li>
       </ul>
     </div>
 
